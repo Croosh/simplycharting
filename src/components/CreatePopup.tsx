@@ -59,6 +59,7 @@ function CreatePopup() {
                 id="username"
                 value={value}
                 className="col-span-3"
+                placeholder="eg 120,200"
                 onChange={(e) => {
                   newValue(e.target.value);
                 }}
