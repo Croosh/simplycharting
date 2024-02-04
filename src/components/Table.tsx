@@ -6,27 +6,37 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Trash } from "lucide-react";
+import { X } from "lucide-react";
+import { Context } from "./Dashboard";
+import { useContext } from "react";
 
-function DataTable({ data, onDeleteRow }) {
+function DataTable() {
+  const [row, setRow] = useContext<object[]>(Context);
+  const handleDeleteRow = (rowToDelete) => {
+    setRow(row.filter((therow) => therow !== rowToDelete));
+  };
   return (
     <div>
       <Table>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Label</TableHead>
-            <TableHead className="text-right">Value</TableHead>
-            <TableHead className="text-right">Delete</TableHead>
+            <TableHead className="text-center">Value</TableHead>
+            <TableHead className="w-[100px]"></TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((row) => {
+          {row.map((data) => {
             return (
               <TableRow>
-                <TableCell className="font-medium">{row.name}</TableCell>
-                <TableCell className="text-right">{row.value}</TableCell>
-                <TableCell>
-                  <Trash onClick={() => onDeleteRow(row)} />
+                <TableCell className="font-medium">{data.name}</TableCell>
+                <TableCell className="  text-center">{data.value}</TableCell>
+                <TableCell className="text-right items-center flex justify-end">
+                  <X
+                    width={16}
+                    cursor={"pointer"}
+                    onClick={() => handleDeleteRow(data)}
+                  />
                 </TableCell>
               </TableRow>
             );
