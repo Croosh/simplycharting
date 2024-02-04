@@ -1,13 +1,20 @@
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
-import FileSaver from "file-saver";
+// import FileSaver from "file-saver";
 import { Button } from "./ui/button";
-export default function Chart({ data }: { data: Array<object> }) {
+
+export default function Chart({
+  data,
+  ticker,
+}: {
+  data: Array<object>;
+  ticker: string;
+}) {
   const handleAreaDownload = async () => {
-    console.log("Pressed");
-    const element = document.querySelector(".recharts-wrapper");
-    const svgURL = new XMLSerializer().serializeToString(element);
-    const svgBlob = new Blob([svgURL], { type: "image/svg+xml;charset=utf-8" });
-    FileSaver.saveAs(svgBlob, "chart.svg");
+    // console.log("Pressed");
+    // const element = document.querySelector(".recharts-wrapper");
+    // const svgURL = new XMLSerializer().serializeToString(element);
+    // const svgBlob = new Blob([svgURL], { type: "image/svg+xml;charset=utf-8" });
+    // FileSaver.saveAs(svgBlob, "chart.svg");
   };
   return (
     <>
@@ -25,7 +32,7 @@ export default function Chart({ data }: { data: Array<object> }) {
             fontSize={12}
             tickLine={false}
             axisLine={false}
-            tickFormatter={(value) => `$${value}`}
+            tickFormatter={(value) => `${ticker} ${value}`}
           />
           <Bar
             dataKey="value"
