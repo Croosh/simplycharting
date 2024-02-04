@@ -1,47 +1,40 @@
 import {
-  Cell,
-  Column,
-  Row,
-  TableView,
+  Table,
   TableBody,
+  TableCell,
+  TableHead,
   TableHeader,
-} from "@adobe/react-spectrum";
-import { Delete } from "lucide-react";
+  TableRow,
+} from "@/components/ui/table";
+import { Trash } from "lucide-react";
 
-function Table({ row }: { row: any }) {
+function DataTable({ data, onDeleteRow }) {
   return (
-    <div className="flex gap-2 justify-center items-center flex-col">
-      <div className="flex gap-2 flex-col w-96 justify-center items-center">
-        {row?.length > 0 ? (
-          <TableView
-            width={window.innerWidth / 2}
-            aria-label="Example table with static contents"
-          >
-            <TableHeader>
-              <Column align="center" allowsResizing>
-                Label
-              </Column>
-              <Column align="center" allowsResizing>
-                Value
-              </Column>
-              <Column align="end">Delete</Column>
-            </TableHeader>
-            <TableBody>
-              {row.map((row: any) => (
-                <Row key={row.id}>
-                  <Cell>{row.name}</Cell>
-                  <Cell>{row.value}</Cell>
-                  <Cell>
-                    <Delete />
-                  </Cell>
-                </Row>
-              ))}
-            </TableBody>
-          </TableView>
-        ) : null}
-      </div>
+    <div>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[100px]">Label</TableHead>
+            <TableHead className="text-right">Value</TableHead>
+            <TableHead className="text-right">Delete</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {data.map((row) => {
+            return (
+              <TableRow>
+                <TableCell className="font-medium">{row.name}</TableCell>
+                <TableCell className="text-right">{row.value}</TableCell>
+                <TableCell>
+                  <Trash onClick={() => onDeleteRow(row)} />
+                </TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
     </div>
   );
 }
 
-export default Table;
+export default DataTable;
