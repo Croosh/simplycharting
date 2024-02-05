@@ -8,6 +8,11 @@ import LChart from "./LineChart";
 export const Context = createContext<object[]>([]);
 
 export default function Dashoard() {
+  interface row {
+    id: number;
+    name: string;
+    value: string;
+  }
   const [ticker, setTicker] = useState("$");
   const [row, setRow] = useState<object[]>([
     {
