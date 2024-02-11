@@ -16,7 +16,7 @@ function DataTable() {
     setRow(row.filter((therow) => therow !== rowToDelete));
   };
   return (
-    <div>
+    <div className="w-full">
       <Table>
         <TableHeader>
           <TableRow>
